@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <title>Салон красоты</title>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: Arial, sans-serif; }
+    header {
+      position: fixed; top: 0; width: 100%;
+      background: #fff; z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav {
+      display: flex; justify-content: center;
+      gap: 20px; padding: 1em;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333; font-weight: bold;
+    }
+    section {
+      padding: 100px 20px 60px;
+      margin-top: 60px; max-width: 800px;
+      margin-left: auto; margin-right: auto;
+    }
+    footer {
+      padding: 40px; background: #f4f4f4;
+      text-align: center;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #popup {
+      display: none;
+      position: fixed;
+      top: 25%;
+      left: 25%;
+      width: 50%;
+      padding: 40px;
+      background: #ddf;
+      border: 2px solid #333;
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      z-index: 9999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      border-radius: 10px;
+    }
+    #popup button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .gallery img {
+      width: 30%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .gallery .row-2 {
+      width: 45%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#about">О салоне</a>
+      <a href="#booking">Записаться</a>
+      <a href="#services">Услуги</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+  </header>
+  <h1 style="text-align: center; font-size: 48px; font-family: cursive; margin-top: 100px;">Shine Lab</h1>
+
+  <section id="about">
+    <h2>О нашем салоне</h2>
+    <p>Добро пожаловать в Shine Lab — ваш надёжный салон красоты в центре города. Мы создаём уютную атмосферу, где каждый клиент чувствует себя особенным. Наша команда состоит из опытных специалистов, которые постоянно повышают свою квалификацию. Мы предлагаем широкий спектр услуг — от классического маникюра до сложных причёсок и ухода за кожей. В Shine Lab используются только качественные и проверенные косметические средства. Мы внимательно относимся к гигиене и безопасности, чтобы вы могли расслабиться и наслаждаться процедурой. Наш салон оборудован современным оборудованием, что позволяет достигать отличных результатов. Мы ценим время наших клиентов и работаем строго по записи, чтобы исключить ожидание. Shine Lab — это не просто салон, это место, где рождается ваша красота и уверенность. Приходите к нам, и мы поможем вам подчеркнуть вашу индивидуальность и создать идеальный образ!</p>
+  </section>
+
+  <section id="booking">
+    <h2>Записаться</h2>
+    <form onsubmit="return handleSubmit(event);">
+      <label for="name">Имя:</label><br />
+      <input type="text" id="name" name="name" required /><br /><br />
+
+      <label for="phone">Телефон:</label><br />
+      <input type="tel" id="phone" name="phone" required /><br /><br />
+
+      <label for="date">Дата:</label><br />
+      <input type="date" id="date" name="date" required /><br /><br />
+
+      <label for="time">Время (08:00–20:00):</label><br />
+      <input type="time" id="time" name="time" min="08:00" max="20:00" required /><br /><br />
+
+      <label for="service">Услуга:</label><br />
+      <input type="text" id="service" name="service" /><br /><br />
+
+      <button type="submit">Отправить</button>
+    </form>
+  </section>
+
+<section id="services">
+    <h2>Наши услуги</h2>
+    <p>Маникюр (от 1500 рублей), Педикюр (от 1800 рублей), Прическа (от 2000 рублей), Окрашивание волос (от 3000 рублей), Макияж (от 2500 рублей)</p>
+    <div class="gallery">
+      <img src="{{ url_for('static', filename='images/u1.jpg') }}" alt="Фото 1">
+      <img src="{{ url_for('static', filename='images/u2.jpg') }}" alt="Фото 2">
+      <img src="{{ url_for('static', filename='images/u3.jpg') }}" alt="Фото 3">
+      <img src="{{ url_for('static', filename='images/u4.jpg') }}" alt="Фото 4">
+      <img src="{{ url_for('static', filename='images/u5.jpg') }}" alt="Фото 5">
+    </div>
+  </section>
+
+
+  <section id="reviews">
+    <h2>Отзывы</h2>
+    <p>«Лучший салон в городе!» — Мария</p>
+    <p>«Замечательный салон, очень понравилось обслуживание, быстро и качественно!» — Анна</p>
+    <p>«Все очень понравилось, рекомендую!» — Анастасия</p>
+
+    <h3>Оставить отзыв</h3>
+    <form onsubmit="return handleReview(event);">
+      <label for="review-name">Ваше имя:</label><br />
+      <input type="text" id="review-name" name="review-name" required /><br /><br />
+
+      <label for="review-text">Отзыв:</label><br />
+      <textarea id="review-text" name="review-text" required rows="4" cols="50"></textarea><br /><br />
+
+      <button type="submit">Оставить отзыв</button>
+    </form>
+  </section>
+
+  <section id="contact">
+     <h2>Контакты</h2>
+    <p>Телефон: +7 (123) 456-78-90</p>
+    <p>Email: shine_lab@gmail.com</p>
+    <p>Адрес: г. Москва, ул. Красоты, д. 1</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Shine Lab. Все права защищены.</p>
+  </footer>
+
+  <div id="popup">
+    <p id="popup-content">Вы записаны!</p>
+    <button onclick="document.getElementById('popup').style.display='none'">Закрыть</button>
+  </div>
+
+  <script>
+  function handleSubmit(event) {
+  event.preventDefault();
+
+  const timeInput = document.getElementById("time").value;
+  const [hours] = timeInput.split(":").map(Number);
+  if (hours < 8 || hours >= 20) {
+    alert("Можно записаться только с 8:00 до 20:00");
+    return false;
+  }
+
+  document.getElementById("popup-content").innerText = "Вы записаны!";
+  document.getElementById("popup").style.display = "block";
+  return false;
+  }
+  function handleReview(event) {
+  event.preventDefault();
+
+  document.getElementById("popup-content").innerText = "Спасибо за отзыв!";
+  document.getElementById("popup").style.display = "block";
+  return false;
+  }
+
+  </script>
+
+</body>
+</html>
